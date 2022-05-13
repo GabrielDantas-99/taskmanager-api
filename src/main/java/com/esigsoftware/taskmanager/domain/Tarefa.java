@@ -1,16 +1,29 @@
 package com.esigsoftware.taskmanager.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
-public class Tarefa {
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
+public class Tarefa implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String titulo;
 	private String descricao;
 	private String prioridade;
 	private Date deadline;
 
+	@ManyToOne
+	@JoinColumn(name = "responsavel_id")
 	private Responsavel responsavel;
 
 	public Tarefa() {
