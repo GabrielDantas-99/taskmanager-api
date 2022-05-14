@@ -1,5 +1,6 @@
 package com.esigsoftware.taskmanager.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,4 +23,7 @@ public class ResponsavelService {
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Responsavel.class.getName()));
 	}
 
+	public List<Responsavel> findAll() {
+		return repository.findAll();
+	}
 }
