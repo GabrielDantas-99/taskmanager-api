@@ -29,4 +29,17 @@ public class TarefaService {
 		responsavelService.findById(id_resp);
 		return repository.findAllByResponsavel(id_resp);
 	}
+
+	public Tarefa update(Integer id, Tarefa obj) {
+		Tarefa newObj = findById(id);
+		updateData(newObj, obj);
+		return repository.save(newObj);
+	}
+
+	private void updateData(Tarefa newObj, Tarefa obj) {
+		newObj.setTitulo(obj.getTitulo());
+		newObj.setDescricao(obj.getDescricao());
+		newObj.setPrioridade(obj.getPrioridade());
+		newObj.setDeadline(obj.getDeadline());
+	}
 }
