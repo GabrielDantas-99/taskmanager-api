@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.esigsoftware.taskmanager.domain.Responsavel;
 import com.esigsoftware.taskmanager.domain.Tarefa;
 import com.esigsoftware.taskmanager.repositories.TarefaRepository;
 import com.esigsoftware.taskmanager.service.exceptions.ObjectNotFoundException;
@@ -41,5 +42,12 @@ public class TarefaService {
 		newObj.setDescricao(obj.getDescricao());
 		newObj.setPrioridade(obj.getPrioridade());
 		newObj.setDeadline(obj.getDeadline());
+	}
+
+	public Tarefa create(Integer id_resp, Tarefa obj) {
+		obj.setId(null);
+		Responsavel resp = responsavelService.findById(id_resp);
+		obj.setResponsavel(resp);
+		return repository.save(obj);
 	}
 }
