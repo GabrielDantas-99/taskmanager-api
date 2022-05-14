@@ -26,4 +26,9 @@ public class ResponsavelService {
 	public List<Responsavel> findAll() {
 		return repository.findAll();
 	}
+	
+	public Responsavel create(Responsavel obj) {
+		obj.setId(null);
+		return repository.save(obj);
+	}
 }
