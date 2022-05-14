@@ -1,15 +1,16 @@
 package com.esigsoftware.taskmanager.domain;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.Objects;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+@Entity(name="tabela_tarefas")
 public class Tarefa implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -20,7 +21,7 @@ public class Tarefa implements Serializable{
 	private String titulo;
 	private String descricao;
 	private String prioridade;
-	private Date deadline;
+	private String deadline;
 
 	@ManyToOne
 	@JoinColumn(name = "responsavel_id")
@@ -31,8 +32,7 @@ public class Tarefa implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Tarefa(Integer id, String titulo, String descricao, String prioridade, Date deadline,
-			Responsavel responsavel) {
+	public Tarefa(Integer id, String titulo, String descricao, String prioridade, String deadline, Responsavel responsavel) {
 		super();
 		this.id = id;
 		this.titulo = titulo;
@@ -74,11 +74,11 @@ public class Tarefa implements Serializable{
 		this.prioridade = prioridade;
 	}
 
-	public Date getDeadline() {
+	public String getDeadline() {
 		return deadline;
 	}
 
-	public void setDeadline(Date deadline) {
+	public void setDeadline(String deadline) {
 		this.deadline = deadline;
 	}
 
