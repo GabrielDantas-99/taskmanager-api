@@ -1,5 +1,6 @@
 package com.esigsoftware.taskmanager.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,9 @@ public class TarefaService {
 
 	@Autowired
 	private TarefaRepository repository; 
+	
+	@Autowired
+	private ResponsavelService responsavelService; 
 
 	public Tarefa findById(Integer id) {
 		Optional<Tarefa> obj = repository.findById(id);
@@ -21,4 +25,8 @@ public class TarefaService {
 				"Tarefa não encontrada! Id: " + id + ", Tipo: " + Tarefa.class.getName()));
 	}
 
+	public List<Tarefa> findAll(Integer id_resp) {
+		responsavelService.findById(id_resp);
+		return repository.findAllByResponsavel(id_resp);
+	}
 }
