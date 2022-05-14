@@ -7,17 +7,19 @@ import org.springframework.stereotype.Service;
 
 import com.esigsoftware.taskmanager.domain.Responsavel;
 import com.esigsoftware.taskmanager.repositories.ResponsavelRepository;
+import com.esigsoftware.taskmanager.service.exceptions.ObjectNotFoundException;
 
 @Service
 public class ResponsavelService {
-	
+
 	// Camada de acesso aos dados
 	@Autowired
 	private ResponsavelRepository repository;
 
 	public Responsavel findById(Integer id) {
 		Optional<Responsavel> obj = repository.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + Responsavel.class.getName()));
 	}
-	
+
 }
