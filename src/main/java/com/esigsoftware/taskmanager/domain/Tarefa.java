@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity(name="tabela_tarefas")
 public class Tarefa implements Serializable{
 
@@ -23,6 +25,7 @@ public class Tarefa implements Serializable{
 	private String prioridade;
 	private String deadline;
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "responsavel_id")
 	private Responsavel responsavel;
