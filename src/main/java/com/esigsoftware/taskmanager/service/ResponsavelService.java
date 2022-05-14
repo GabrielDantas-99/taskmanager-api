@@ -27,16 +27,24 @@ public class ResponsavelService {
 	public List<Responsavel> findAll() {
 		return repository.findAll();
 	}
+
 	// Criando Responsavel
 	public Responsavel create(Responsavel obj) {
 		obj.setId(null);
 		return repository.save(obj);
 	}
+
 	// Atualizando reponsavel
 	public Responsavel update(Integer id, ResponsavelDTO objDto) {
 		Responsavel obj = findById(id);
 		obj.setNome(objDto.getNome());
 		obj.setDescricao(objDto.getDescricao());
 		return repository.save(obj);
+	}
+
+	public void delete(Integer id) {
+		findById(id);
+		repository.deleteById(id);
+
 	}
 }
