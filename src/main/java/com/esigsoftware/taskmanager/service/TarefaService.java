@@ -50,4 +50,10 @@ public class TarefaService {
 		obj.setResponsavel(resp);
 		return repository.save(obj);
 	}
+
+	public void delete(Integer id) {
+		Tarefa obj = findById(id);
+		repository.delete(obj);
+		
+	}
 }
