@@ -10,6 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
 
 @Entity(name="tabela_responsavel")
 public class Responsavel implements Serializable{
@@ -19,7 +22,13 @@ public class Responsavel implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
+	@NotEmpty(message = "Campo Nome requerido!")
+	@Length(min = 3, max = 100, message = "O campo Nome deve ter entre 3 e 100 caracteres")
 	private String nome;
+	
+	@NotEmpty(message = "Campo Descricao requerido!")
+	@Length(min = 3, max = 100, message = "O campo Descricao deve ter entre 5 e 200 caracteres")
 	private String descricao;
 	
 	@OneToMany(mappedBy = "responsavel")

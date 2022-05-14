@@ -4,8 +4,11 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -22,6 +25,7 @@ import com.esigsoftware.taskmanager.domain.Tarefa;
 import com.esigsoftware.taskmanager.dtos.TarefaDTO;
 import com.esigsoftware.taskmanager.service.TarefaService;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping(value = "/tarefas")
 public class TarefaResource {
@@ -43,20 +47,19 @@ public class TarefaResource {
 	}
 	// Atualizando toda a tarefa
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Tarefa> update(@PathVariable Integer id, @RequestBody Tarefa obj) {
+	public ResponseEntity<Tarefa> update(@PathVariable Integer id, @Valid @RequestBody Tarefa obj) {
 		Tarefa newObj = service.update(id, obj);
 		return ResponseEntity.ok().body(newObj);
 	}
 	// Atualizando uma informação
 	@PatchMapping(value = "/{id}")
-	public ResponseEntity<Tarefa> updatePatch(@PathVariable Integer id, @RequestBody Tarefa obj) {
+	public ResponseEntity<Tarefa> updatePatch(@PathVariable Integer id, @Valid @RequestBody Tarefa obj) {
 		Tarefa newObj = service.update(id, obj);
 		return ResponseEntity.ok().body(newObj);
 	}
 	
 	@PostMapping
-	public ResponseEntity<Tarefa> create(@RequestParam(value = "responsavel", defaultValue = "0") Integer id_resp,
-			@RequestBody Tarefa obj) {
+	public ResponseEntity<Tarefa> create(@RequestParam(value = "responsavel", defaultValue = "0") Integer id_resp, @Valid @RequestBody Tarefa obj) {
 		Tarefa newObj = service.create(id_resp, obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/tarefas/{id}").buildAndExpand(newObj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
